@@ -1,0 +1,39 @@
+# Dependabot opens one PR per ecosystem per week, with every update grouped together.
+# Security updates (enabled in the repo settings) still open right away, also grouped.
+#
+# The prek and zizmor pins (`uvx --from prek==…` in the workflow, README and pre-commit config)
+# aren't read by Dependabot; bump them by hand with `prek autoupdate`.
+version: 2
+
+updates:
+  - package-ecosystem: npm # reads pnpm-lock.yaml
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    cooldown:
+      default-days: 7
+    open-pull-requests-limit: 2
+    commit-message:
+      prefix: "build(deps)"
+    groups:
+      npm:
+        applies-to: version-updates
+        patterns: ["*"]
+      npm-security:
+        applies-to: security-updates
+        patterns: ["*"]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    cooldown:
+      default-days: 7
+    open-pull-requests-limit: 2
+    commit-message:
+      prefix: "ci(deps)"
+    groups:
+      actions:
+        patterns: ["*"]
