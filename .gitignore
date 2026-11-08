@@ -1,0 +1,9 @@
+# Build output and JavaScript tooling
+/dist/
+/node_modules/
+/.cloudflare/
+/.wrangler/
+/playwright-report/
+/test-results/
+.env*
+.dev.vars*

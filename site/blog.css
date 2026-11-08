@@ -1,0 +1,225 @@
+/* The palette, base styles, header and footer of baggiponte.com, copied from baggiponte/blog's
+   src/styles/global.css (its start up to "---- home ----", and its footer section) so the tools look like the blog.
+   When the blog's look changes, copy those sections here again. */
+:root {
+  --paper: #fdf9ee;
+  --ink: #1c1a14;
+  --muted: #6c6656;
+  --line: rgba(28, 26, 20, 0.12);
+  --rule: rgba(28, 26, 20, 0.22);
+  --accent: #e0562b;
+  --mark: #ffdcc2;
+  --code-bg: #fffdf7;
+  --code-line: rgba(28, 26, 20, 0.1);
+  --code-muted: #857e6b;
+
+  --sans: "Instrument Sans Variable", system-ui, -apple-system, sans-serif;
+  --display: "Bricolage Grotesque Variable", var(--sans);
+  --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
+
+  /* text is 60% of the window, never narrower than 560px or wider than 760px */
+  --col: clamp(560px, 60vw, 760px);
+  --gutter: 32px;
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --paper: #13120d;
+  --ink: #f7f2e4;
+  --muted: #a8a18f;
+  --line: rgba(247, 242, 228, 0.13);
+  --rule: rgba(247, 242, 228, 0.24);
+  --accent: #ff8a5c;
+  --mark: rgba(255, 138, 92, 0.28);
+  --code-bg: #1c1a13;
+  --code-line: rgba(247, 242, 228, 0.09);
+  --code-muted: #8e8874;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+  /* short pages keep the scrollbar's space, so the column doesn't shift between pages */
+  scrollbar-gutter: stable;
+}
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 16.5px / 1.65 var(--sans);
+  -webkit-font-smoothing: antialiased;
+  /* a long word in any title breaks at the edge instead of widening the page */
+  overflow-wrap: break-word;
+  transition:
+    background 0.3s,
+    color 0.3s;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+[hidden] {
+  /* biome-ignore lint/complexity/noImportantStyles: `hidden` must win over any class that sets display */
+  display: none !important;
+}
+.wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-inline: var(--gutter);
+}
+.skip {
+  position: absolute;
+  left: 16px;
+  top: -60px;
+  z-index: 30;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--paper);
+}
+.skip:focus {
+  top: 12px;
+}
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+kbd {
+  font: 500 11px / 1 var(--mono);
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  padding: 3px 5px;
+  background: color-mix(in srgb, var(--ink) 4%, transparent);
+}
+
+/* ---- header ---- */
+header.top {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: color-mix(in srgb, var(--paper) 85%, transparent);
+  backdrop-filter: blur(14px);
+}
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-block: 18px;
+}
+.brand {
+  font: 700 19px / 1 var(--display);
+  letter-spacing: -0.03em;
+  margin-right: auto;
+}
+.brand i {
+  font-style: normal;
+  color: var(--accent);
+}
+.tabs {
+  display: flex;
+  gap: 2px;
+}
+.tab {
+  font-size: 15px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  color: var(--muted);
+  transition:
+    color 0.2s,
+    background 0.2s;
+}
+@media (hover: hover) {
+  .tab:hover {
+    color: var(--ink);
+    background: color-mix(in srgb, var(--ink) 5%, transparent);
+  }
+}
+/* the active tab gets the same pastel marker stroke as the rotating bio */
+.tab.active {
+  color: var(--ink);
+  text-decoration: underline 0.5em var(--mark);
+  text-underline-offset: -0.3em;
+  text-decoration-skip-ink: none;
+}
+.search {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-left: 10px;
+  padding: 6px 8px 6px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  font-size: 14px;
+  color: var(--muted);
+}
+@media (hover: hover) {
+  .search:hover {
+    border-color: var(--ink);
+    color: var(--ink);
+  }
+}
+.search .glass {
+  display: none;
+  width: 16px;
+  height: 16px;
+}
+.theme-toggle {
+  all: unset;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: var(--ink);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@media (hover: hover) {
+  .theme-toggle:hover {
+    transform: rotate(-25deg);
+  }
+}
+.theme-toggle svg {
+  width: 19px;
+  height: 19px;
+}
+.theme-toggle .sun,
+[data-theme="dark"] .theme-toggle .moon {
+  display: none;
+}
+[data-theme="dark"] .theme-toggle .sun {
+  display: block;
+}
+
+/* ---- footer ---- */
+footer {
+  margin-top: 56px;
+}
+.foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-block: 28px 44px;
+  border-top: 1px solid var(--line);
+  font-size: 14px;
+  color: var(--muted);
+}
+.foot a:hover {
+  color: var(--accent);
+}
+.foot .links {
+  display: flex;
+  gap: 18px;
+}

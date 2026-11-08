@@ -1,0 +1,80 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
+  "files": {
+    "includes": ["**"]
+  },
+  "formatter": { "indentStyle": "space", "indentWidth": 2, "lineWidth": 120 },
+  "javascript": { "formatter": { "arrowParentheses": "asNeeded" } },
+  // The tools are plain HTML pages: lint and format them too.
+  "html": { "experimentalFullSupportEnabled": true, "formatter": { "enabled": true }, "linter": { "enabled": true } },
+  "linter": {
+    "rules": {
+      "preset": "recommended",
+      "complexity": {
+        "noUselessStringConcat": "error",
+        "noUselessUndefinedInitialization": "error",
+        "useWhile": "error"
+      },
+      "correctness": {
+        // Relative imports spell out their extension, as Node needs to run the .ts scripts and tests.
+        "useImportExtensions": "error",
+        "noUndeclaredDependencies": "error",
+        "noUnusedFunctionParameters": "error",
+        "noUnusedImports": "error",
+        "noUnusedVariables": "error"
+      },
+      "nursery": {
+        // Type-aware: an async call nobody awaits loses its errors.
+        "noFloatingPromises": "error",
+        "noMisusedPromises": "error",
+        "useExhaustiveSwitchCases": "error"
+      },
+      "performance": {
+        "noAccumulatingSpread": "error",
+        "noAwaitInLoops": "off",
+        "noBarrelFile": "error",
+        "noReExportAll": "error"
+      },
+      "style": {
+        // Braces on every if/for body, so adding a second line can't silently fall outside it.
+        "useBlockStatements": "error",
+        "useConsistentArrayType": { "level": "error", "options": { "syntax": "shorthand" } },
+        "useConsistentTypeDefinitions": { "level": "error", "options": { "style": "interface" } },
+        "useExportType": "error",
+        "useImportType": "error",
+        "useNodejsImportProtocol": "error",
+        "useNumberNamespace": "error",
+        "useThrowNewError": "error",
+        "useThrowOnlyError": "error",
+        "useCollapsedElseIf": "error",
+        "useDefaultParameterLast": "error",
+        "useSingleVarDeclarator": "error",
+        "useShorthandFunctionType": "error",
+        "useExplicitLengthCheck": "error",
+        "useAtIndex": "error",
+        "noParameterAssign": "error",
+        "noNestedTernary": "error",
+        "noUselessElse": "error",
+        "noInferrableTypes": "error",
+        "useErrorCause": "error",
+        // `value!` claims a value is never missing without checking; check it, or throw a clear error.
+        "noNonNullAssertion": "error",
+        // The stylesheets rely on source order for overrides (phones), not on specificity.
+        "noDescendingSpecificity": "off"
+      },
+      "suspicious": {
+        "noConsole": { "level": "error", "options": { "allow": ["error", "warn", "log"] } },
+        "noEvolvingTypes": "error",
+        "noExplicitAny": "error",
+        "noImplicitAnyLet": "error",
+        "noSkippedTests": "error",
+        "noFocusedTests": "error",
+        "useAwait": "error",
+        "useErrorMessage": "error",
+        "useNumberToFixedDigitsArgument": "error"
+      }
+    }
+  },
+  "assist": { "actions": { "source": { "organizeImports": "on" } } }
+}
