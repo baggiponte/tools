@@ -3,12 +3,12 @@
 Small tools that run in the browser, at <https://tools.baggiponte.com>, dressed like
 [baggiponte.com](https://baggiponte.com).
 
-| tool | what it does |
-| --- | --- |
-| [formatter](https://tools.baggiponte.com/formatter/) | write a linkedin post with bold, italic and lists, then copy it as unicode text linkedin keeps |
-| [preferiresti](https://tools.baggiponte.com/preferiresti/) | turn a would-you-rather dilemma into a 1080×1920 story and export it as a png |
-| [metronomo](https://tools.baggiponte.com/metronomo/) | a metronome with time signatures, subdivisions, an accented downbeat and tap tempo |
-| [accordatore](https://tools.baggiponte.com/accordatore/) | tune a six-string guitar with reference notes or the microphone |
+| tool                                                       | what it does                                                                                   |
+| ---------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| [formatter](https://tools.baggiponte.com/formatter/)       | write a linkedin post with bold, italic and lists, then copy it as unicode text linkedin keeps |
+| [preferiresti](https://tools.baggiponte.com/preferiresti/) | turn a would-you-rather dilemma into a 1080×1920 story and export it as a png                  |
+| [metronomo](https://tools.baggiponte.com/metronomo/)       | a metronome with time signatures, subdivisions, an accented downbeat and tap tempo             |
+| [accordatore](https://tools.baggiponte.com/accordatore/)   | tune a six-string guitar with reference notes or the microphone                                |
 
 Formatter and preferiresti used to live in their own repositories and subdomains (`formatter.baggiponte.com`,
 `preferiresti.baggiponte.com`); both are archived.
@@ -40,14 +40,14 @@ pnpm test         # browser tests against the build (TOOLS_BASE_URL to test the 
 Production is the Cloudflare Worker `tools`, deployed by Workers Builds on every push to `main`, like the blog. Its
 build settings live in the Cloudflare dashboard:
 
-| setting | value |
-| --- | --- |
-| Git repository | `baggiponte/tools`, production branch `main` |
-| Build command | `pnpm build` |
-| Deploy command | `pnpm run deploy` |
-| Root directory | `/` |
-| Build watch paths | all |
-| Non-production branch builds | off (GitHub CI checks PRs) |
+| setting                      | value                                        |
+| ---------------------------- | -------------------------------------------- |
+| Git repository               | `baggiponte/tools`, production branch `main` |
+| Build command                | `pnpm build`                                 |
+| Deploy command               | `pnpm run deploy`                            |
+| Root directory               | `/`                                          |
+| Build watch paths            | all                                          |
+| Non-production branch builds | off (GitHub CI checks PRs)                   |
 
 ## Checks
 
